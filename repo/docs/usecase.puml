@@ -1,0 +1,29 @@
+@startuml
+left to right direction
+title UML Use Case: личный кабинет студента
+actor "Студент" as S
+actor "Преподаватель" as T
+actor "Администратор" as A
+T <|-- A
+
+rectangle "Система «Личный кабинет»" {
+  usecase "Регистрация" as UC1
+  usecase "Вход в систему" as UC2
+  usecase "Просмотр и правка своего профиля" as UC3
+  usecase "Просмотр своих оценок" as UC4
+  usecase "Просмотр профилей и оценок студентов" as UC5
+  usecase "Выставление оценки" as UC6
+  usecase "Управление ролями и пользователями" as UC7
+}
+
+S --> UC1
+S --> UC2
+S --> UC3
+S --> UC4
+T --> UC2
+T --> UC3
+T --> UC4
+T --> UC5
+T --> UC6
+A --> UC7
+@enduml

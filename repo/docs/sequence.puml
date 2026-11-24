@@ -1,0 +1,25 @@
+@startuml
+title UML Sequence: преподаватель ставит оценку, студент её смотрит
+actor "Преподаватель" as T
+actor "Студент" as S
+participant "Flask" as API
+participant "CabinetService" as SVC
+database "SQLite" as DB
+
+T -> API: POST /login (логин, пароль)
+API -> SVC: login()
+SVC -> DB: SELECT пользователь, проверка пароля
+SVC --> API: токен
+API --> T: вход выполнен
+
+T -> API: POST /students/{id}/grades
+API -> SVC: authenticate(token), add_grade()
+SVC -> SVC: проверка права grades:write
+SVC -> DB: INSERT INTO grades
+API --> T: оценка выставлена
+
+S -> API: GET /cabinet
+API -> SVC: get_grades()
+SVC -> DB: SELECT grades
+API --> S: страница с оценками
+@enduml

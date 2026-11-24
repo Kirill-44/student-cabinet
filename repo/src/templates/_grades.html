@@ -1,0 +1,13 @@
+<table>
+  <thead><tr><th>Предмет</th><th>Оценка</th></tr></thead>
+  <tbody>
+  {% for g in grades %}
+    <tr><td>{{ g.subject }}</td><td>{{ g.value }}</td></tr>
+  {% else %}
+    <tr><td colspan="2">Оценок пока нет</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% if grades %}
+  <p class="muted">Средний балл: {{ '%.2f'|format((grades|sum(attribute='value')) / grades|length) }}</p>
+{% endif %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Редактирование профиля{% endblock %}
+{% block content %}
+<h1>Редактирование профиля</h1>
+<form method="post" class="card">
+  <input type="hidden" name="csrf" value="{{ csrf_token }}">
+  <label>ФИО <input name="full_name" value="{{ profile.full_name }}" required></label>
+  <label>Группа <input name="group_name" value="{{ profile.group_name }}"></label>
+  <label>Email <input name="email" value="{{ profile.email }}"></label>
+  <label>Телефон <input name="phone" value="{{ profile.phone }}"></label>
+  <button>Сохранить</button>
+  <a href="{{ url_for('cabinet_page') }}">Отмена</a>
+</form>
+{% endblock %}

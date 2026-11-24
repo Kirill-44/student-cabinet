@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Пользователи{% endblock %}
+{% block content %}
+<h1>Пользователи</h1>
+<table>
+  <thead><tr><th>ID</th><th>Логин</th><th>ФИО</th><th>Роль</th></tr></thead>
+  <tbody>
+  {% for u in users %}
+    <tr>
+      <td>{{ u.id }}</td><td>{{ u.username }}</td><td>{{ u.full_name }}</td>
+      <td>
+        <form method="post" action="{{ url_for('set_role', user_id=u.id) }}" class="inline">
+          <input type="hidden" name="csrf" value="{{ csrf_token }}">
+          <select name="role">
+            {% for r in Role %}
+              <option value="{{ r.value }}" {{ 'selected' if r.value == u.role }}>{{ r.value }}</option>
+            {% endfor %}
+          </select>
+          <button>Сменить</button>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

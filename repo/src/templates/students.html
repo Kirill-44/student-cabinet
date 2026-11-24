@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Студенты{% endblock %}
+{% block content %}
+<h1>Студенты</h1>
+<table>
+  <thead><tr><th>ФИО</th><th>Группа</th><th>Логин</th><th></th></tr></thead>
+  <tbody>
+  {% for s in students %}
+    <tr>
+      <td>{{ s.full_name }}</td><td>{{ s.group_name or '—' }}</td><td>{{ s.username }}</td>
+      <td><a href="{{ url_for('student_detail', student_id=s.id) }}">Открыть</a></td>
+    </tr>
+  {% else %}
+    <tr><td colspan="4">Студентов пока нет</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

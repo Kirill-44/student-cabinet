@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Личный кабинет{% endblock %}
+{% block content %}
+<h1>Личный кабинет</h1>
+<section class="card">
+  <h2>{{ profile.full_name }}</h2>
+  <dl>
+    <dt>Логин</dt><dd>{{ profile.username }}</dd>
+    <dt>Роль</dt><dd>{{ profile.role }}</dd>
+    <dt>Группа</dt><dd>{{ profile.group_name or '—' }}</dd>
+    <dt>Email</dt><dd>{{ profile.email or '—' }}</dd>
+    <dt>Телефон</dt><dd>{{ profile.phone or '—' }}</dd>
+  </dl>
+  <a class="btn" href="{{ url_for('edit_profile') }}">Редактировать профиль</a>
+</section>
+<section class="card">
+  <h2>Мои оценки</h2>
+  {% include "_grades.html" %}
+</section>
+{% endblock %}
